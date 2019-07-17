@@ -1,0 +1,26 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t naresh/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run naresh/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t naresh/multi-client ./client
+  - docker build -t naresh/multi-nginx ./nginx
+  - docker build -t naresh/multi-server ./server
+  - docker build -t naresh/multi-worker ./worker
+
+#Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+#take those images and push them to docker hub
+  - docker push naresh/multi-client
+  - docker push naresh/multi-nginx
+  - docker push naresh/multi-server
+  - docker push naresh/multi-worker
+
+  
