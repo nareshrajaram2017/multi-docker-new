@@ -18,9 +18,9 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 #take those images and push them to docker 
-  - docker push nareshrajaram/publicdockerrepo:naresh/multi-client
-  - docker push nareshrajaram/publicdockerrepo:naresh/multi-nginx
-  - docker push nareshrajaram/publicdockerrepo:naresh/multi-server
-  - docker push nareshrajaram/publicdockerrepo:naresh/multi-worker
+  - docker push nareshrajaram/publicdockerrepo:multi-client
+  - docker push nareshrajaram/publicdockerrepo:multi-nginx
+  - docker push nareshrajaram/publicdockerrepo:multi-server
+  - docker push nareshrajaram/publicdockerrepo:multi-worker
 
   
